@@ -2,7 +2,7 @@ mod common;
 
 use assert_cmd::Command;
 
-static READ_HUMAN: &str = r#"Message { topic: "topic", partition: 0, offset: 0, timestamp: Some(CreateTime(1663602628526)), headers: "NONE", key: Some([98, 97, 110, 97, 110, 97, 45, 107, 101, 121]), payload: "<8 BYTES>" }"#;
+static READ_HUMAN: &str = r#"Message { topic: "topic", partition: 0, offset: 0, timestamp: Some(CreateTime(1663602628526)), headers: "NONE", key: Some("banana-key"), payload: Some("platanos") }"#;
 static READ_JSON: &str = r#"{"topic":"topic","partition":0,"offset":0,"timestamp":{"CreateTime":1663602628526},"headers":null,"key":[98,97,110,97,110,97,45,107,101,121],"payload":[112,108,97,116,97,110,111,115]}"#;
 
 // TODO(dom:test): read from kafka
