@@ -1,0 +1,25 @@
+[package]
+name = "ktool"
+version = "0.1.0"
+edition = "2021"
+authors = ["Dom <dom@itsallbroken.com>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rdkafka = "0.28.0"
+serde = "1.0.137"
+serde_json = "1.0.81"
+bincode = "1.3.3"
+clap = { version = "3.1.18", features = ["derive"] }
+thiserror = "1.0.31"
+anyhow = "1.0.57"
+indicatif = { version = "0.16.2", features = ["improved_unicode"] }
+
+[dev-dependencies]
+assert_cmd = "2.0.4"
+assert_matches = "1.5.0"
+paste = "1.0.7"
+
+[[bin]]
+name = "ktool"
