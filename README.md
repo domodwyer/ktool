@@ -66,7 +66,7 @@ $ ktool cp kafka://$BROKERS/my_topic/42 copy.kbin
 To replay, copy a stream of messages on disk into a partition:
 
 ```console
-$ ktool cp ./tests/fixture.kbin kafka://$BROKERS/my_topic/42`
+$ ktool cp ./tests/fixture.kbin kafka://$BROKERS/my_topic/42
 [*] opening dump file: ./tests/fixture.kbin
 [*] connecting to kafka brokers: 127.0.0.1:60212
 [*] read complete
