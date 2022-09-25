@@ -1,8 +1,14 @@
 [package]
 name = "ktool"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
 authors = ["Dom <dom@itsallbroken.com>"]
+description = "A dead-simple tool for working with data in Kafka"
+documentation = "https://docs.rs/ktool"
+repository = "https://github.com/domodwyer/ktool"
+license = "Apache-2.0"
+categories = ["command-line-utilities"]
+keywords = ["kafka"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
