@@ -44,7 +44,7 @@ pub struct CliArgs {
 
 pub fn run(args: CliArgs) -> anyhow::Result<()> {
     // Reject reading and writing to the same kafka topic.
-    if &args.to == &args.from {
+    if args.to == args.from {
         return Err(anyhow!("read source and write sink cannot be the same"));
     }
 
@@ -55,7 +55,7 @@ pub fn run(args: CliArgs) -> anyhow::Result<()> {
         .context("failed to initialise copy source")?;
 
     // Limit messages to the configured offsets
-    let mut source = args.offset.wrap_iter(source);
+    let source = args.offset.wrap_iter(source);
 
     // Initialise the message sink.
     let mut sink = sink::init(args.to, &args.kafka_args)?;
@@ -118,7 +118,7 @@ pub fn run(args: CliArgs) -> anyhow::Result<()> {
 
     // Drive the copy by reading from the source, and pushing it to the buffer
     // channel to the sink thread.
-    while let Some(maybe_msg) = source.next() {
+    for maybe_msg in source {
         match maybe_msg {
             Ok(v) => {
                 tx.send(v).expect("writer thread has died");

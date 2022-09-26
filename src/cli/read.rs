@@ -45,12 +45,12 @@ pub fn run(args: CliArgs) -> anyhow::Result<()> {
         .context("failed to initialise copy source")?;
 
     // Limit messages to the configured offsets
-    let mut source = args.offset.wrap_iter(source);
+    let source = args.offset.wrap_iter(source);
 
     let mut w = BufWriter::new(stdout());
 
     // Read from the source, respecting the configured offset ranges, if any.
-    while let Some(maybe_msg) = source.next() {
+    for maybe_msg in source {
         match maybe_msg {
             Ok(v) => {
                 // Print this message.

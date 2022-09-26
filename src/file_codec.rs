@@ -26,7 +26,7 @@ where
     W: std::io::Write,
 {
     let header = bincode::serialized_size(msg)?;
-    w.write(&header.to_le_bytes())?;
+    w.write_all(&header.to_le_bytes())?;
 
     bincode::serialize_into(&mut w, msg)?;
 

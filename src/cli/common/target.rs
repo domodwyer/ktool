@@ -13,7 +13,7 @@ pub enum TargetError {
     Invalid,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum Target {
     Kafka {
         brokers: Vec<String>,
