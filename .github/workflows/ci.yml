@@ -1,8 +1,9 @@
+name: ci
 on: [push]
 
 jobs:
   build_and_test:
-    name: CI
+    name: ci
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
