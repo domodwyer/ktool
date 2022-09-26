@@ -1,0 +1,14 @@
+name: e2e
+on: [push]
+
+jobs:
+  build_and_test:
+    name: e2e
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: cd tests && docker-compose up -d
+      - run: TEST_INTEGRATION=1 TEST_KAFKA_ADDR="localhost:9092" cargo test --all-features
