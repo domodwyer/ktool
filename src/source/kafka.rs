@@ -49,11 +49,16 @@ pub fn new(
 
     // If a start offset was provided, seek the consumer to it to skip the prior
     // messages.
-    let offset = if let Some(offset) = start_offset {
-        offset_start = offset;
-        Offset::Offset(offset)
-    } else {
-        Offset::Beginning
+    let offset = match start_offset {
+        Some(v) if v < 0 => {
+            offset_start = offset_end + v;
+            Offset::OffsetTail(-v)
+        }
+        Some(v) => {
+            offset_start = v;
+            Offset::Offset(v)
+        }
+        None => Offset::Beginning,
     };
 
     let mut targets = TopicPartitionList::new();
