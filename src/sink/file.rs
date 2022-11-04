@@ -19,7 +19,7 @@ impl FileSink {
         let f = OpenOptions::new()
             .write(true)
             .create_new(true)
-            .open(&path)
+            .open(path)
             .with_context(|| format!("failed to open file {} for writing", path.display()))?;
 
         Ok(Self {

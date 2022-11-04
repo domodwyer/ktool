@@ -10,15 +10,19 @@ pub(crate) struct OffsetClap {
     /// Restrict messages read from the source to the specified offsets.
     ///
     /// Offsets are inclusive and in the form "start", or with an optional end
-    /// offset as "start:end"
+    /// offset as "start:end". Negative start values are relative to the current
+    /// partition offset.
     ///
     ///   - read all messages from offset 42, inclusive: "42"
+    ///
+    ///   - read the 3 most recent messages: -3
     ///
     ///   - read messages 42 to 100, inclusive: "42:100"
     ///
     ///   - read all messages up to (and including) offset 1234: ":1234"
     ///
     ///   - read only message number 42: "42:42"
+    ///
     #[clap(short, long, parse(try_from_str), conflicts_with = "time-range")]
     offset: Option<OffsetRange>,
 
@@ -73,7 +77,7 @@ where
     fn next(&mut self) -> Option<Self::Item> {
         loop {
             match self.0.next()? {
-                Ok(v) if self.1.cmp(&v) == None => {
+                Ok(v) if self.1.cmp(&v).is_none() => {
                     panic!("cannot compare offset");
                 }
                 Ok(v) if self.1.cmp(&v) == Some(Ordering::Greater) => return None,
