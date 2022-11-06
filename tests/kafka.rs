@@ -56,7 +56,7 @@ fn test_produce_consume() {
 fn test_consume_tail() {
     let addr = maybe_skip_integration!();
 
-    static TOPIC: &str = "topic";
+    static TOPIC: &str = "another-topic";
 
     let kafka_config = KafkaOpts {
         timeout: Duration::from_secs(5),
