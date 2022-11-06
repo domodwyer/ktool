@@ -1,6 +1,6 @@
 [package]
 name = "ktool"
-version = "1.0.1"
+version = "1.1.0"
 edition = "2021"
 authors = ["Dom <dom@itsallbroken.com>"]
 description = "A dead-simple tool for working with data in Kafka"
