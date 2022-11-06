@@ -3,7 +3,7 @@ use std::io::{stdout, BufWriter, Write};
 use anyhow::Context;
 use clap::Args;
 
-use crate::source;
+use crate::{json_output::JsonMessage, source};
 
 use super::common::{OffsetClap, Target};
 
@@ -27,6 +27,9 @@ pub struct CliArgs {
     from: Target,
 
     /// Output messages as newline delimited JSON objects.
+    ///
+    /// Fields where Kafka allows binary content are base64 encoded, this
+    /// includes the message key, payload and header values.
     #[clap(long)]
     json: bool,
 
@@ -55,7 +58,9 @@ pub fn run(args: CliArgs) -> anyhow::Result<()> {
             Ok(v) => {
                 // Print this message.
                 if args.json {
-                    serde_json::to_writer(&mut w, &v)
+                    // Wrap this in a JsonMessage to generate the field
+                    // modifications specifically for the JSON format.
+                    serde_json::to_writer(&mut w, &JsonMessage::from(&v))
                         .expect("serialisation of messages is infallible");
                     writeln!(&mut w).unwrap();
                 } else {

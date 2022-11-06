@@ -299,4 +299,22 @@ mod tests {
         input = "1:2:3",
         want = Err(OffsetError::TooManyParts)
     );
+
+    test_parse_offset!(
+        tail_relative,
+        input = "-42",
+        want = Ok(OffsetRange {
+            start: -42,
+            end: None,
+        })
+    );
+
+    test_parse_offset!(
+        tail_relative_and_end,
+        input = "-42:12",
+        want = Ok(OffsetRange {
+            start: -42,
+            end: Some(12),
+        })
+    );
 }

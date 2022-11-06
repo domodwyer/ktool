@@ -1,3 +1,5 @@
+//! Binary file format codec, serialising a [`Message`] into an on-disk format.
+
 use std::io::ErrorKind;
 
 use crate::message::Message;
