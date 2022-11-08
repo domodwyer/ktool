@@ -12,3 +12,4 @@ jobs:
           toolchain: stable
       - run: cd tests && docker-compose up -d
       - run: TEST_INTEGRATION=1 TEST_KAFKA_ADDR="localhost:9092" cargo test --test e2e --all-features
+      - run: TEST_INTEGRATION=1 TEST_KAFKA_ADDR="localhost:9092" cargo test --test kafka --all-features
