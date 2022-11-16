@@ -19,9 +19,11 @@
 # To run manually:
 #   pre-commit run --all
 
+default_install_hook_types: [pre-commit, pre-push, commit-msg]
+
 repos:
   - repo: https://github.com/domodwyer/pre-commit
-    rev: v3.4.1
+    rev: v3.5.0
     hooks:
       - id: rust-clippy
         stages: [commit, push]
@@ -36,7 +38,7 @@ repos:
         stages: [push]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.2.0
+    rev: v4.3.0
     hooks:
       - id: check-executables-have-shebangs
         stages: [commit, manual]
@@ -55,7 +57,7 @@ repos:
         stages: [commit]
 
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v2.27.0
+    rev: v2.37.0
     hooks:
       - id: commitizen
         stages: [commit-msg]
