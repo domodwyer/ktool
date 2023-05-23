@@ -13,7 +13,8 @@ fn base64_serialise<S>(v: &'_ [u8], s: S) -> Result<S::Ok, S::Error>
 where
     S: Serializer,
 {
-    let encoded = base64::encode(v);
+    use base64::Engine;
+    let encoded = base64::engine::general_purpose::STANDARD.encode(v);
     s.serialize_str(&encoded)
 }
 
