@@ -58,9 +58,11 @@ where
         );
     }
 
+    // Covert len into a usize
+    let len: usize = len.try_into().expect("message size exceeds usize");
+
     // Read the message of len bytes in length.
-    let mut buf = Vec::new();
-    buf.resize(len.try_into().expect("message size exceeds usize"), 0);
+    let mut buf = vec![0; len];
     r.read_exact(&mut buf)?;
 
     bincode::deserialize(&buf).map_err(CodecError::from)
