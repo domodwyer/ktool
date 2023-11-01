@@ -1,7 +1,7 @@
 ## ktool - a tool for Kafka
 
 <p align="center">
-<img src="https://s3-eu-west-1.amazonaws.com/iab-assets/ktool.gif" />
+<img src="https://assets.itsallbroken.com/github/ktool.gif" />
 </p>
 
 `ktool` is a dead-simple tool for working with data in Kafka:
