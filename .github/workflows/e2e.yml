@@ -5,11 +5,23 @@ jobs:
   build_and_test:
     name: e2e
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
+
+      - name: Start redpanda
+        run: docker compose -f tests/docker-compose.yml up -d
+
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cd tests && docker-compose up -d
+
+      - name: Cache target dir
+        id: target-dir
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-target-dir-all-features
+          path: target
+
       - run: TEST_INTEGRATION=1 TEST_KAFKA_ADDR="localhost:9092" cargo test --test e2e --all-features
       - run: TEST_INTEGRATION=1 TEST_KAFKA_ADDR="localhost:9092" cargo test --test kafka --all-features
